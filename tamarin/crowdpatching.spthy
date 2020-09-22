@@ -1,0 +1,437 @@
+theory CrowdPatching
+begin
+
+//
+//
+//
+
+builtins: hashing, asymmetric-encryption, symmetric-encryption, signing
+
+
+// BGN Functions and Equations
+
+  functions:
+
+    // Proving and veryfing keys as constant and private functions
+    GenProvKey/0 [private],
+    GenVerifKey/0 [private],
+
+    // Functions to generate and verify proofs
+    zkProve/2,
+    zkVerify/3,
+
+    // Constant to define when a proof is successfully verified
+    ver/0
+
+
+  equations:
+
+    // Model zkSNARKs considering only protocol-specific statement
+    zkVerify( GenVerifKey, < h(U), senc(U, r), h(r) >,
+      zkProve( GenProvKey, < < h(U), senc(U, r), h(r) >, <U, r> > ) ) = ver
+
+// END Functions and Equations
+
+
+// BGN PKI
+rule publicKeyInfrastructure:
+    [ Fr(~ltk) ]
+  --[ PubKey( $X, pk(~ltk) ) ]->
+    [ !Ltk($X, ~ltk), !Pk( $X, pk(~ltk) ), Out( pk(~ltk) ) ]
+// END PKI
+
+
+// BGN Setup
+rule setup:
+
+  let
+    Uh = h(~U)
+    PK  = GenProvKey
+    VK  = GenVerifKey
+    P = <~U, PK, VK>
+    sigByM = sign(Uh, ~ltkM)
+  in
+
+    [ !Ltk('M', ~ltkM)
+    , Fr(~U)
+
+    , !Ltk('IoT1', ~ltkIoT1) 
+    , !Ltk('IoT2', ~ltkIoT2)
+    , !Ltk('IoT3', ~ltkIoT3)
+
+    , !Ltk('D1', ~ltkD1)
+    , !Ltk('D2', ~ltkD2)
+    , !Ltk('D3', ~ltkD3)
+    
+    , !Ltk('H1', ~ltkH1)
+    , !Ltk('H2', ~ltkH2) ]
+    
+  --[ Setup()
+    , UpdatePublished(~U) ]->
+
+    [ // General public info as fact to model blockchain integrity
+      // (Used by an entity to securely read from the blockchain)
+      !DSC_Info( Uh, sigByM, h(VK) )
+
+      // Same general public information in the network
+    , Out( <pk(~ltkM), Uh, sigByM, h(VK)> )
+
+      // IoT public info as linear facts
+      // (SC can securely read/write this from/to the blockchain)
+    , St_SC_0( 'SC', <'IoT1', pk(~ltkIoT1)> )
+    , St_SC_0( 'SC', <'IoT2', pk(~ltkIoT2)> )
+    , St_SC_0( 'SC', <'IoT3', pk(~ltkIoT3)> )
+
+      // Same IoT public info as permanent facts
+      // (Anyone can securely read from the blockchain)
+    , !DSC_Info_IoT( 'IoT1', pk(~ltkIoT1) )
+    , !DSC_Info_IoT( 'IoT2', pk(~ltkIoT2) )
+    , !DSC_Info_IoT( 'IoT3', pk(~ltkIoT3) )
+
+      // Same IoT public info out in the network
+      // (Even the attacker can read the blockchain)
+    , Out( <Uh, 'IoT1', pk(~ltkIoT1)> )
+    , Out( <Uh, 'IoT2', pk(~ltkIoT2)> )
+    , Out( <Uh, 'IoT3', pk(~ltkIoT3)> )
+
+    , St_IoT_0( 'IoT1', <~ltkIoT1, pk(~ltkM), 'H1'> )
+    , St_IoT_0( 'IoT2', <~ltkIoT2, pk(~ltkM), 'H1'> )
+    , St_IoT_0( 'IoT3', <~ltkIoT3, pk(~ltkM), 'H2'> )
+
+    , St_H_0( 'H1', <~ltkH1, 'IoT1'> )
+    , St_H_0( 'H1', <~ltkH1, 'IoT2'> )
+    , St_H_0( 'H2', <~ltkH2, 'IoT3'> )
+
+    , St_D_0( 'D1', <~ltkD1, P, 'IoT1'> )
+    , St_D_0( 'D1', <~ltkD1, P, 'IoT2'> )
+    , St_D_0( 'D1', <~ltkD1, P, 'IoT3'> )
+    
+    , St_D_0( 'D2', <~ltkD2, P, 'IoT1'> )
+    , St_D_0( 'D2', <~ltkD2, P, 'IoT2'> )
+    , St_D_0( 'D2', <~ltkD2, P, 'IoT3'> )
+    
+    , St_D_0( 'D3', <~ltkD3, P, 'IoT1'> )
+    , St_D_0( 'D3', <~ltkD3, P, 'IoT2'> )
+    , St_D_0( 'D3', <~ltkD3, P, 'IoT3'> ) ]
+
+// END Setup
+
+
+
+/****************************** PROTOCOL RULES ******************************/
+
+
+// BGN StepA
+rule H_1:
+
+    [ St_H_0( $H, <~ltkH, $IoT> )
+    , !DSC_Info( Uh, sigByM, VKh ) ]
+
+  --[ ExecStepA() ]->
+
+    [ Out( <'UpdateRequest', $IoT, $H> )
+    , St_H_1( $H, <~ltkH, $IoT, Uh, sigByM, VKh> ) ]
+
+// END StepA
+
+
+// BGN StepB
+rule D_1:
+
+  let
+    P = <U, PK, VK>
+  in
+
+    [ St_D_0( $D, <~ltkD, P, $IoT> )
+    , In( <'UpdateRequest', $IoT, $H> )
+    , !DSC_Info_IoT( $IoT, pkIoT )
+    , Fr(~c) ]
+
+  --[ ExecStepB() ]->
+
+    [ Out( <'IdChallenge', $D, $H, $IoT, ~c> )
+    , St_D_1( $D, <~ltkD, P, $IoT, pkIoT, $H, ~c> ) ]
+
+// END StepB
+
+
+// BGN StepC
+rule H_2:
+
+    [ St_H_1( $H, <~ltkH, $IoT, Uh, sigByM, VKh> )
+    , In( <'IdChallenge', $D, $H, $IoT, c> ) ]
+
+  --[ ExecStepC() ]->
+
+    [ LocalChannel( $H, $IoT, <'IdChallenge', c, Uh, sigByM> )
+    , St_H_2( $H, <~ltkH, $IoT, Uh, VKh, $D> ) ]
+
+// END StepC
+
+
+// BGN StepD
+rule IoT_1:
+
+  let
+    result                     = verify(sigByM, Uh, pkM)
+    sigOnChallengeNonceByIoT   = sign( <c, ~nonce>, ~ltkIoT )
+  in
+
+    [ St_IoT_0( $IoT, <~ltkIoT, pkM, $H> )
+    , LocalChannel( $H, $IoT, <'IdChallenge', c, Uh, sigByM> )
+    , Fr(~nonce) ]
+
+  --[ Eq( result, true )
+
+    , ExecStepD() ]->
+
+    [ LocalChannel( $IoT, $H, <'IdReply', sigOnChallengeNonceByIoT, ~nonce> )
+    , St_IoT_1( $IoT, <~ltkIoT, pkM, $H, Uh> ) ]
+
+// END StepD
+
+
+// BGN StepE
+rule H_3:
+
+    [ St_H_2( $H, <~ltkH, $IoT, Uh, VKh, $D> )
+    , LocalChannel( $IoT, $H, <'IdReply', sigOnChallengeNonceByIoT, ~nonce> ) ]
+
+  --[ ExecStepE() ]->
+
+    [ Out( <'IdReply', $H, $D, $IoT, sigOnChallengeNonceByIoT, ~nonce> )
+    , St_H_3( $H, <~ltkH, $IoT, Uh, VKh, $D> ) ]
+
+// END StepE
+
+
+// BGN StepF
+rule D_2:
+
+	let
+    P       = <U, PK, VK>
+    result1 = verify(sigOnChallengeNonceByIoT, <~c, nonce>, pkIoT)
+    r       = h(<~t, pkIoT, pk(~ltkD)>)
+    Uenc    = senc(U, r)
+    s       = h(r)
+    sec     = <U, r>
+    pub     = <h(U), Uenc, s>
+    pi      = zkProve( PK, <pub, sec> )
+    result2 = zkVerify( VK, pub, pi )
+  in
+
+    [ St_D_1( $D, <~ltkD, P, $IoT, pkIoT, $H, ~c> )
+    , In( <'IdReply', $H, $D, $IoT, sigOnChallengeNonceByIoT, nonce> )
+    , Fr(~t) ]
+
+  --[ Eq(result1, true)
+    , Eq(result2, ver)
+
+    , ExecStepF()
+    
+    , GenProof(pk(~ltkD), $IoT, U) ]->
+
+    [ Out( <'zkSNARKsProof', $D, $H, $IoT, pi, Uenc, s, VK> )
+    , St_D_2( $D, <~ltkD, P, $IoT, pkIoT, $H, ~t, r, s> ) ]
+
+// END StepF
+
+
+// BGN StepG
+rule H_4:
+
+  let
+    pub    = <Uh, Uenc, s>
+    result = zkVerify( VK, pub, pi )
+  in
+
+    [ St_H_3( $H, <~ltkH, $IoT, Uh, VKh, $D> )
+    , In( <'zkSNARKsProof', $D, $H, $IoT, pi, Uenc, s, VK> ) ]
+
+  --[ Eq( VKh, h(VK) ), Eq( result, ver )
+  
+    , ExecStepG() ]->
+
+    [ LocalChannel( $H, $IoT, <'DeliveryProofRequest', <s, Uh> > )
+    , St_H_4( $H, <~ltkH, $IoT, Uh, $D, Uenc, s> ) ]
+
+// END StepG
+
+
+// BGN StepH
+rule IoT_2:
+
+  let
+    sigByIoT = sign(<s, Uh>, ~ltkIoT)
+  in
+
+    [ St_IoT_1( $IoT, <~ltkIoT, pkM, $H, Uh> )
+    , LocalChannel( $H, $IoT, <'DeliveryProofRequest', <s, Uh> > ) ]
+
+  --[ ExecStepH() ]->
+
+    [ LocalChannel( $IoT, $H, <'DeliveryProof', sigByIoT> )
+    , St_IoT_2( $IoT, <~ltkIoT, pkM, $H, Uh> ) ]
+
+// END StepH
+
+
+// BGN StepI
+rule H_5:
+
+    [ St_H_4( $H, <~ltkH, $IoT, Uh, $D, Uenc, s> )
+    , LocalChannel( $IoT, $H, <'DeliveryProof', deliveryProof> ) ]
+
+  --[ ExecStepI() ]->
+
+    [ Out( <'DeliveryProof', $H, $D, $IoT, deliveryProof> ) 
+    , St_H_5( $H, <~ltkH, $IoT, Uh, Uenc, s> ) ]
+
+// END StepI
+
+
+// BGN StepJ 
+rule D_3:
+
+  let
+    P          = <U, PK, VK>
+    result     = verify(deliveryProof, <s, h(U)>, pkIoT)
+    submission = <pk(~ltkD), $IoT, ~t, r, s, deliveryProof>
+  in
+
+    [ St_D_2( $D, <~ltkD, P, $IoT, pkIoT, $H, ~t, r, s> )
+    , In( <'DeliveryProof', $H, $D, $IoT, deliveryProof> ) ]
+
+  --[ Eq( result, true )
+
+    , ExecStepJ( ) ]->
+
+    [ Out( <'DeliveryProofSubmission', submission> ) ]
+
+// END StepJ
+
+
+// BGN StepK
+rule SC_1:
+
+  let
+    submission = <pkD, $IoT, t, r, s, deliveryProof>
+  in
+
+    [ St_SC_0( 'SC', <$IoT, pkIoT> )
+    , !DSC_Info( Uh, sigByM, VKh )
+
+    , In( <'DeliveryProofSubmission', submission> ) ]
+
+  --[ Eq( r, h(<t, pkIoT, pkD>) ), Eq( s, h(r) )
+    , Eq( verify(deliveryProof, <s, Uh>, pkIoT), true )
+
+    , ExecStepK()
+    , OverallExecStepK($IoT)
+
+    , PaymentToD(pkD, $IoT) ]->
+
+      // No need for Out() version of key publication
+      // (Because submission already passed through network)
+    [ !SC_Info_UpdateDecryptionKey($IoT, <Uh, r>) ]
+
+// END StepK
+
+
+// BGN StepL
+rule H_6:
+
+  let
+    Udec = sdec(Uenc, r)
+  in
+
+    [ St_H_5( $H, <~ltkH, $IoT, Uh, Uenc, s> )
+    , !SC_Info_UpdateDecryptionKey($IoT, <Uh, r>) ]
+
+  --[ Eq( s, h(r) ), Eq( Uh, h(Udec) )
+
+    , ExecStepL()
+    
+    , UpdateReadyForIoT( $IoT, Udec ) ]->
+
+    [ St_H_6( /*$H, <~ltkH, $IoT, Uh, pub>*/ 'UpdateReadyForIoT', $IoT ) ]
+
+// END StepL
+
+
+
+/****************************** RESTRICTIONS ******************************/
+
+restriction SetupTakesPlace:
+"
+  Ex #i . Setup() @i
+"
+
+restriction OneSetup:
+"
+  All #i #j . Setup() @i & Setup() @j ==> #i = #j
+"
+
+restriction Equality:
+"
+  All x y #i. Eq(x,y) @i ==> x = y
+"
+
+
+
+/****************************** LEMMAS ******************************/
+
+// Overall executability of the protocol
+lemma ExecutabilityAllIoTGetUpdate: exists-trace
+"
+/*
+    (In at least one instance)
+    All IoTs get the update and that update file is
+    the same that was published by manufacturer M
+*/
+Ex #t0 #t1 #t2 #t3 U
+  . UpdateReadyForIoT('IoT1', U) @t1
+  & UpdateReadyForIoT('IoT2', U) @t2
+  & UpdateReadyForIoT('IoT3', U) @t3
+  & UpdatePublished(U) @t0
+  & t0 < t1 & t0 < t2 & t0 < t3
+"
+
+lemma PaymentOnlyIfGenerateProof: all-traces // VERIFIED
+"
+  All #j pkD IoT
+  . PaymentToD(pkD, IoT) @j
+
+  ==> Ex #i U
+      . GenProof(pkD, IoT, U) @i
+      & i < j
+"
+
+lemma AlwaysPaidIfUpdateReady: all-traces // VERIFIED
+"
+  All #k IoT U
+  .  UpdateReadyForIoT(IoT, U) @k
+  
+  ==> Ex #i #j pkD
+      . PaymentToD(pkD, IoT) @i
+      & GenProof(pkD, IoT, U) @j
+"
+
+lemma MaxOnePaymentForOneIoT: all-traces // VERIFIED
+"
+  All #i #j IoT pkD1 pkD2
+  . PaymentToD(pkD1, IoT) @i 
+  & PaymentToD(pkD2, IoT) @j
+
+  ==> 
+
+    #i = #j & pkD1 = pkD2 
+"
+
+
+
+//
+//
+//
+
+end
