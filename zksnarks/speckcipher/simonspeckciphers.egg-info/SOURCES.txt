@@ -1,0 +1,11 @@
+setup.cfg
+setup.py
+simon/__init__.py
+simon/simon.py
+simonspeckciphers.egg-info/PKG-INFO
+simonspeckciphers.egg-info/SOURCES.txt
+simonspeckciphers.egg-info/dependency_links.txt
+simonspeckciphers.egg-info/not-zip-safe
+simonspeckciphers.egg-info/top_level.txt
+speck/__init__.py
+speck/speck.py
