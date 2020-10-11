@@ -37,7 +37,7 @@ The zk-SNARKs implementation for CrowdPatching employs the [_jsnark_](https://gi
 - Compile _libsnark_
     - Enter the `libsnark` folder
         ```
-        $ cd zksnarks/libsnark
+        $ cd crowdpatching/zksnarks/libsnark
         ```
     - Create a _build_ directory and enter it
         ```
@@ -48,11 +48,16 @@ The zk-SNARKs implementation for CrowdPatching employs the [_jsnark_](https://gi
         ```
         $ cmake .. -DWITH_PROCPS=OFF
         ```
-    - Finally compile all libsnark source code
+    - Finally compile all _libsnark_ source code
         ```
-        $ make 
+        $ make
         ```
 - Compile _jsnark_
-    ```
-    $ javac -d bin -cp /usr/share/java/junit4.jar:bcprov-jdk15on-159.jar  $(find ./src/* | grep ".java$")
-    ```
+    - Enter the _jsnark_ circuits folder
+        ```
+        $ cd crowdpatching/zksnarks/JsnarkCircuitBuilder
+        ```
+    - Compile all _jsnark_ source code
+        ```
+        $ javac -d bin -cp /usr/share/java/junit4.jar:bcprov-jdk15on-159.jar  $(find ./src/* | grep ".java$")
+        ```
