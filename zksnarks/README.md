@@ -117,6 +117,8 @@ $ ~/<REPOSITORY PATH>/crowdpatching/zksnarks/libsnark/build/libsnark/jsnark_inte
 
 In the last step we generated the actual zk-SNARKs proof! This is stored in a new file called `proof_export`.
 
+## Verify: verify proof using the verifying key
+
 Finally, we can execute the verifier V. In this case, there is no jsnark-side program, but only the libsnark-side. This program takes no command line arguments, as the file names for the key VK and the proof are hard-coded. Most importantly, the public values (i.e. the non-secret values, the primary input for the NP statement) are hard-coded in this program.
 
 ```
