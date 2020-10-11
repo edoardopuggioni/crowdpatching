@@ -24,16 +24,16 @@ The zk-SNARKs implementation for CrowdPatching employs the [_jsnark_](https://gi
     - File `bcprov-jdk15on-159.jar` already included in this repository
     - It is assumed to be placed in the `JsnarkCircuitBuilder` directory
     - However you can download it with the following command:
-    ``` 
-    $ wget https://www.bouncycastle.org/download/bcprov-jdk15on-159.jar
-    ``` 
+        ``` 
+        $ wget https://www.bouncycastle.org/download/bcprov-jdk15on-159.jar
+        ``` 
 
 # Installation Instructions
 
 - Clone this repository
-```
-$ git clone https://github.com/edoardopuggioni/crowdpatching.git
-```
+    ```
+    $ git clone https://github.com/edoardopuggioni/crowdpatching.git
+    ```
 - Compile _libsnark_
     - Enter the `libsnark` folder
         ```
