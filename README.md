@@ -1,15 +1,13 @@
 # CrowdPatching
 
-## Installing Tamarin
+Master Thesis Source Files
+- Visiting researcher at Deaking University, Melbourne, Australia
+- Master's Degree in Computer Engineering at Politecnico di Torino, Turin, Italy
 
-Follow instructions on the [official manual](https://tamarin-prover.github.io/manual/book/002_installation.html) to install on Linux or Mac:
+## Tamarin Documentation
 
-1. Install [Homebrew](https://brew.sh/)
+The Tamarin documentation can be found [here](tamarin/README.md)
 
-    (Remember to add to PATH and install dependencies)
+## zk-SNARKs Documentation
 
-1. Install Tamarin through Homebrew:
-
-    `$ brew install tamarin-prover/tap/tamarin-prover`
-
-Get started with help option: `$ tamarin-prover --help`
+The zk-SNARKs documentation can be found [here](zksnarks/README.md)
