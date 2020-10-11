@@ -1,4 +1,4 @@
-The zk-SNARKs implementation for CrowdPatching employs the [_jsnark_](https://github.com/akosba/jsnark) library, which in turn uses [_libsnark_](https://github.com/scipr-lab/libsnark) as sub-module, among many other dependencies.
+The zk-SNARKs implementation for _CrowdPatching_ employs the [_jsnark_](https://github.com/akosba/jsnark) library, which in turn uses [_libsnark_](https://github.com/scipr-lab/libsnark) as sub-module, among many other dependencies.
 
 # Prerequisites
 
@@ -8,7 +8,7 @@ The zk-SNARKs implementation for CrowdPatching employs the [_jsnark_](https://gi
     ```
     $ sudo apt-get install build-essential cmake git libgmp3-dev libprocps-dev python-markdown libboost-all-dev libssl-dev
     ```
-- For other distributions check [_jsnark_](https://github.com/akosba/jsnark#prerequisites) and [_libsnark_](https://github.com/scipr-lab/libsnark#dependencies)
+- For other distributions check the [_jsnark_](https://github.com/akosba/jsnark#prerequisites) and [_libsnark_](https://github.com/scipr-lab/libsnark#dependencies) instructions
 
 ## Prerequisites for _jsnark_
 
