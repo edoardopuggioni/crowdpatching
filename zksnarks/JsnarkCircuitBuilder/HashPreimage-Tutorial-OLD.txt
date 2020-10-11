@@ -7,13 +7,6 @@ input) is the pre-image, provided by the prover, which is simply the
 "plain-text" that will be hashed and not revealed to the verifier.
 
 
-THIS TUTORIAL REFERS TO THE FILES GIVEN BY THE FOLLOWING COMMIT
-
-Created and tested tutorial for running a whole circuit example
-Commit code: 7bec2354f9e802f3e843bd9a85225a7bddcf9f8c
-Commit link: https://github.com/edoardopuggioni/jsnarking/commit/7bec2354f9e802f3e843bd9a85225a7bddcf9f8c
-
-
 In the following steps I will refer to "jsnark code" when indicating
 the Java part of the source code, which concerns jsnark. And I will
 refer to the libsnark code when indicating the C++ part of the source
