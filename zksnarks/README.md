@@ -58,6 +58,10 @@ The zk-SNARKs implementation for _CrowdPatching_ employs the [_jsnark_](https://
         ```
         $ cd crowdpatching/zksnarks/JsnarkCircuitBuilder
         ```
+    - Create a new `bin` folder
+        ```
+        $ mkdir bin
+        ```    
     - Compile all _jsnark_ source code
         ```
         $ javac -d bin -cp /usr/share/java/junit4.jar:bcprov-jdk15on-159.jar  $(find ./src/* | grep ".java$")
