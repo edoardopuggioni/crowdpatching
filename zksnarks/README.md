@@ -27,6 +27,7 @@ The zk-SNARKs implementation for _CrowdPatching_ employs the [_jsnark_](https://
         ``` 
         $ wget https://www.bouncycastle.org/download/bcprov-jdk15on-159.jar
         ``` 
+    - Make it executable with `chmod +x bcprov-jdk15on-159.jar`
 
 # Installation Instructions
 
@@ -61,3 +62,5 @@ The zk-SNARKs implementation for _CrowdPatching_ employs the [_jsnark_](https://
         ```
         $ javac -d bin -cp /usr/share/java/junit4.jar:bcprov-jdk15on-159.jar  $(find ./src/* | grep ".java$")
         ```
+# Execute the zk-SNARKs algorithms for the _CrowdPatching_ protocol
+
