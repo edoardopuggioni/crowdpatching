@@ -61,7 +61,7 @@
 
 - Change port used by Ganache (from the GUI) to match the one used in `ethereum/truffle-config.js` for the `development` network, which is the default network used by Truffle
 
-## Migrate smart contracts
+## Migrate the SSC smart contract
 
 - Execute the following command:
     ```
