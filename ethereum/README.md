@@ -38,7 +38,7 @@
 
 - Execute the .AppImage file itself
 
-- Select the QUICKSTART option
+- Select the `QUICKSTART` option
 
 ## Configure Truffle and Ganache
 
