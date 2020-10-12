@@ -8,7 +8,7 @@
 
 - Install [Truffle](https://www.trufflesuite.com/truffle)
     ```
-    npm install truffle -g
+    npm install -g truffle
     ```
     This repository was tested with the following Truffle version:
     ```
@@ -17,6 +17,10 @@
     Solidity v0.5.16 (solc-js)
     Node v12.19.0
     Web3.js v1.2.1
+    ```
+    To install that specific version:
+    ```
+    npm install -g truffle@v5.1.48
     ```
 
 - Download Ganache
@@ -67,3 +71,17 @@
     ```
     $ truffle migrate
     ```
+
+## Interact with the SCC (deploy DSCs and ESCs and more)
+
+- Execute the provided Truffle script:
+
+    ```
+    truffle execute truffle-executable-script.js
+    ```
+
+    This will perform several tests:
+    - To-do
+    - To-do
+
+- Alternatively you can modify that script or create a new one
