@@ -28,7 +28,7 @@
     Instead of downloading the program from the [main Ganache website](https://www.trufflesuite.com/ganache) go to the [official GitHub repository](https://github.com/trufflesuite/ganache/releases) to download a specific version of the program from the assets: this implementation was **tested with version 2.4.0**
 
 
-# Build and run smart contracts
+# Build and deploy the smart contracts
 
 ## Run Ganache (Ethereum local blockchain)
 
@@ -55,19 +55,24 @@
             }
         } 
         ```
-    - If you want to browse/modify the Solidity source files with Visual Studio Code (solidity extension by Juan Blanco) you need to install the specific compiler version as a node module
+    - To browse/modify the Solidity source files with Visual Studio Code:
+    
+        - Install the _solidity_ extension by Juan Blanco
 
-        - Open a new terminal in the `crowdpatching/ethereum` directory
-        - Execute the following to install the node module locally:
+        - Add the following setting to the `settings.json` file:
             ```
-            $ sudo npm install solc@0.5.16  
+            "solidity.compileUsingRemoteVersion": "v0.5.16+commit.9c3226ce"
             ```
+        
+        - Otherwise VSCode will use the latest compiler and show errors
 
 - Change port used by Ganache (from the GUI) to match the one used in `ethereum/truffle-config.js` for the `development` network, which is the default network used by Truffle
 
-## Migrate the SSC smart contract
+## Migrate (deploy on the blockchain) the SSC smart contract
 
-- Execute the following command:
+- Open a new terminal in the `crowdpatching/ethereum` directory
+
+- Execute the following command, which compiles the smart contracts before deploying them on the local blockchain provided by Ganache:
     ```
     $ truffle migrate
     ```
@@ -81,6 +86,7 @@
     ```
 
     This will perform several tests:
+    - To-do
     - To-do
     - To-do
 
