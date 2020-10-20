@@ -21,7 +21,7 @@ contract SSC
     event BadDSC(address addressDSC, address owner);
     event NewESC(address addressESC);
 
-    constructor (uint distributorResetWeeks, uint distributorResetDays) /*public*/ public
+    constructor (uint distributorResetWeeks, uint distributorResetDays) public
     {
         owner = msg.sender;
 
