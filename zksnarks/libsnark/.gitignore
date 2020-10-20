@@ -54,3 +54,5 @@ build
 *.a
 *.cproject
 *.project
+
+depends/libfqfft/libfqfft/profiling/logs
