@@ -67,6 +67,9 @@ contract SSC
         address[] memory objectsAddresses, bytes32 pkgHash, bytes32 vkHash,
         uint256 singleRewardAmount, uint256 singleFinalRewardAmount) public payable
     {
+        if ( msg.sender != owner )
+            return;
+
         uint expWeeks = _expWeeks;
         uint expDays = _expDays;
 
