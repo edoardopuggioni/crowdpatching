@@ -14,8 +14,8 @@ contract DSC
     }
 
     // State variables
-    address public owner;          // address of owner (vendor)
-    address public parentContract; // address of factory contract
+    address public owner;          // address of owner (manufacturer)
+    address public parentContract; // address of SSC
     uint public expiration;
     uint256 public singleRewardAmount;
     uint256 public singleFinalRewardAmount;
