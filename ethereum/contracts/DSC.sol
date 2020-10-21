@@ -101,7 +101,7 @@ contract DSC
         if (objectsMap[objectAddress].rSet == true )
             return "Update already delivered to this object";
 
-        if ( r != sha256(abi.encodePacked(t, msg.sender)) )
+        if ( r != sha256(abi.encodePacked(t, objectAddress, msg.sender)) )
             return "Invalid r: must be SHA256(t || msg.sender)";
 
         if ( s != sha256(abi.encodePacked(r)) )
