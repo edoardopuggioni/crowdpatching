@@ -131,8 +131,8 @@ contract DSC
         objectsMap[objectAddress].rSet = true;
 
         // Call the parent function to update the distributor's score
-        SSC bm = SSC(parentContract);
-        bm.incrementDistributorScore(msg.sender);
+        SSC ssc = SSC(parentContract);
+        ssc.incrementDistributorScore(msg.sender);
 
         // Emit event to announce the key publication
         emit KeyRevealed(objectAddress, r);
