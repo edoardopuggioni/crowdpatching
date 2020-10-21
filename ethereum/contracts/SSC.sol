@@ -51,15 +51,17 @@ contract SSC
             return;
 
         // Increment distributor's score
-        if ( block.timestamp - distributorsMap[distributorAddress].lastReset > distributorResetPeriod && distributorsMap[distributorAddress].score != 0)
+        if ( distributorsMap[distributorAddress].score != 0 && (block.timestamp - distributorsMap[distributorAddress].lastReset > distributorResetPeriod) )
         {
             distributorsMap[distributorAddress].score = 0;
             distributorsMap[distributorAddress].lastReset = block.timestamp;
         }
+
         if ( distributorsMap[distributorAddress].lastReset == 0 )
         {
             distributorsMap[distributorAddress].lastReset = block.timestamp;
         }
+
         distributorsMap[distributorAddress].score++;
     }
 
