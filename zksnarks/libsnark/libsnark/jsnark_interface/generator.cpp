@@ -46,8 +46,6 @@ int main(int argc, char **argv)
 
     // Generating keys
     
-    // This gives compile error, I will make it look like my generator in libsnarking
-    // r1cs_ppzksnark_keypair<libsnark::default_ec_pp> keypair = r1cs_ppzksnark_generator<libsnark::default_ec_pp>(cs);
     r1cs_ppzksnark_keypair<libsnark::default_r1cs_ppzksnark_pp> keypair = r1cs_ppzksnark_generator<libsnark::default_r1cs_ppzksnark_pp>(cs);
 
 
