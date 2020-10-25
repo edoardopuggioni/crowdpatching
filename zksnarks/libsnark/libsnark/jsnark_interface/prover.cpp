@@ -64,9 +64,6 @@ int main(int argc, char **argv)
 
 
     r1cs_example<FieldT> example(cs, primary_input, auxiliary_input);
-
-    // The following probably does not work, need to use a different data type instead of default_ec_pp
-    // r1cs_ppzksnark_proof<libsnark::default_ec_pp> proof = r1cs_ppzksnark_prover<libsnark::default_ec_pp>(pk, example.primary_input, example.auxiliary_input);
     r1cs_ppzksnark_proof<libsnark::default_r1cs_ppzksnark_pp> proof = 
         r1cs_ppzksnark_prover<libsnark::default_r1cs_ppzksnark_pp>(keypair.pk, example.primary_input, example.auxiliary_input);
 
