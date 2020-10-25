@@ -39,13 +39,13 @@ int main(int argc, char **argv)
 
 
     r1cs_constraint_system<FieldT> cs = get_constraint_system_from_gadgetlib2(*pb);
-    const r1cs_variable_assignment<FieldT> full_assignment = get_variable_assignment_from_gadgetlib2(*pb);
-    cs.primary_input_size = reader.getNumInputs() + reader.getNumOutputs();
-    cs.auxiliary_input_size = full_assignment.size() - cs.num_inputs();
+
+    // const r1cs_variable_assignment<FieldT> full_assignment = get_variable_assignment_from_gadgetlib2(*pb);
+    // cs.primary_input_size = reader.getNumInputs() + reader.getNumOutputs();
+    // cs.auxiliary_input_size = full_assignment.size() - cs.num_inputs();
 
 
     // Generating keys
-    
     r1cs_ppzksnark_keypair<libsnark::default_r1cs_ppzksnark_pp> keypair = r1cs_ppzksnark_generator<libsnark::default_r1cs_ppzksnark_pp>(cs);
 
 
