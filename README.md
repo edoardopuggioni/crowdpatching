@@ -1,7 +1,7 @@
 # CrowdPatching
 
 Master Thesis Source Files
-- Visiting researcher at Deaking University, Melbourne, Australia
+- Visiting researcher at Deakin University, Melbourne, Australia
 - Master's Degree in Computer Engineering at Politecnico di Torino, Turin, Italy
 
 ## Tamarin Documentation
