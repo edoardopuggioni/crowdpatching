@@ -9,24 +9,34 @@ iv =  0x9c26393e3032af5461f181b91e6176e4 # same IV  as CrowdPatching
 
 cipher = SpeckCipher(key, key_size=128, block_size=128, mode='CBC', init=iv)
 
-numHexDigitsPerBlock = 128 / 4
+numHexDigitsPerBlock = int(128/4)
 
 
 ##################### CBC ENCRYPTION #####################
-if(0):
+if(1):
 
     # Plaintext size: 64 Bytes * 4 = 256 bytes
-    plaintextStr = "AJDSFAHDVKJSMNakljfkajhsfkawasalwhertaljhg9835498hgbq98fdaojsas1" + \
-                   "94805uyh7wjkfssfsslkdq0lkjdlsj029vnaf13iaifdjlk2jrefdjlksdflafa1" + \
-                   "94805uyhlkdq0lkjdkdq0lkjdlsj029vnaf13iaifdjlk2jrefdjlksghdflafa1" + \
-                   "h7wjkfssfsslkdq0hlkdq0lkjdkdq0lkjdlsjhlkdq0lkjdkdq0lkaslkjdlsj01"
+    # plaintextStrUnit = "AJDSFAHDVKJSMNakljfkajhsfkawasalwhertaljhg9835498hgbq98fdaojsas1" + \
+    #                "94805uyh7wjkfssfsslkdq0lkjdlsj029vnaf13iaifdjlk2jrefdjlksdflafa1" + \
+    #                "94805uyhlkdq0lkjdkdq0lkjdlsj029vnaf13iaifdjlk2jrefdjlksghdflafa1" + \
+    #                "h7wjkfssfsslkdq0hlkdq0lkjdkdq0lkjdlsjhlkdq0lkjdkdq0lkaslkjdlsj01"
+    plaintextStrUnit = "AJDSFAHDVKJSMNakljfkajhsfkawasalwhertaljhg9835498hgbq98fdaojsas194805uyh7wjkfssfsslkdq0lkjdlsj029vnaf13iaifdjlk2jrefdjlksdflafa194805uyhlkdq0lkjdkdq0lkjdlsj029vnaf13iaifdjlk2jrefdjlksghdflafa1h7wjkfssfsslkdq0hlkdq0lkjdkdq0lkjdlsjhlkdq0lkjdkdq0lkaslkjdlsj01"
+
+    plaintextStr = plaintextStrUnit
+    # Concatenate string with itself to obtain larger files
+    # cycles = 800
+    # cycles = 12288
+    # for x in range(cycles):
+        # plaintextStr += plaintextStrUnit
 
     # Convert from string of chars to integer
     plaintext = sum([ord(c) << (8 * x) for x, c in enumerate(reversed(plaintextStr))])
 
     # Convert from integer to hex string
     plaintextHex = hex(plaintext)
-    plaintextHexClean = plaintextHex[2:-1]
+    plaintextHexClean = plaintextHex[2:] # Prima stavo tagliando l'ultima cifra...
+    # print("\n plaintextHexClean:\n" + plaintextHexClean)
+    # print("\n plaintextHex:\n" + plaintextHex)
     plaintextHexCleanLen = len(plaintextHexClean)
 
     # Alternatively you can directly assign the hex string of the plaintext
@@ -36,7 +46,7 @@ if(0):
     plaintextHexCleanNumChars = len(plaintextHexClean)
     numBlocksInPlainText = plaintextHexCleanNumChars * 4 / 128
 
-    # print("Number of blocks in plaintext: " + str(numBlocksInPlainText))
+    print("Number of blocks in plaintext: " + str(numBlocksInPlainText))
 
     ciphertextHexClean = ""
     i = 0
@@ -60,10 +70,11 @@ if(0):
         curCiphertextInt = cipher.encrypt(curPlaintextInt)
         curCipertextHexString = hex(curCiphertextInt)
 
-        curCiphertextHexClean = curCipertextHexString[2:-1]
+        curCiphertextHexClean = curCipertextHexString[2:]
 
         # Looking at the prints I noticed that one ciphertext was
         # "missing" one digit, meaning I need to do padding...
+        # PADDING IS PRODUCING PROBLEMS I WILL TRY TO COMMENT IT AND USE MULTIPLE SIZE PLAINTEXT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         l = len(curCiphertextHexClean)
         if(l != numHexDigitsPerBlock):
             padLen = numHexDigitsPerBlock-l
@@ -78,11 +89,12 @@ if(0):
     
         i += numHexDigitsPerBlock
 
+
     print("Final ciphertext:\n" + ciphertextHexClean)
 
 
 ##################### CBC DECRYPTION #####################
-if(1):
+if(0):
 
     # Reset IV
     cipher.update_iv(iv)
@@ -109,13 +121,14 @@ if(1):
         curDecryptedHexClean = curDecryptedHexString[2:-1]
 
         # Padding
-        l = len(curDecryptedHexClean)
-        if(l != numHexDigitsPerBlock):
-            padLen = numHexDigitsPerBlock-l
-            j = 0
-            while (j < padLen):
-                curDecryptedHexClean = "0" + curDecryptedHexClean
-                j += 1
+        # PADDING IS PRODUCING PROBLEMS I WILL TRY TO COMMENT IT AND USE MULTIPLE SIZE PLAINTEXT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        # l = len(curDecryptedHexClean)
+        # if(l != numHexDigitsPerBlock):
+        #     padLen = numHexDigitsPerBlock-l
+        #     j = 0
+        #     while (j < padLen):
+        #         curDecryptedHexClean = "0" + curDecryptedHexClean
+        #         j += 1
 
         # print("Current block decryption result:    " + curDecryptedHexClean)
 
@@ -126,4 +139,4 @@ if(1):
     print("\nFinal decrypted plaintext:\n" + decryptedHexClean)
 
     # Uncomment if encryption is enabled
-    # print("\nOriginal plaintext:\n" + plaintextHexClean)
+    print("\nOriginal plaintext:\n" + plaintextHexClean)
