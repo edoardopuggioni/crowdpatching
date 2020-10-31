@@ -16,18 +16,13 @@ numHexDigitsPerBlock = int(128/4)
 if(1):
 
     # Plaintext size: 64 Bytes * 4 = 256 bytes
-    # plaintextStrUnit = "AJDSFAHDVKJSMNakljfkajhsfkawasalwhertaljhg9835498hgbq98fdaojsas1" + \
+    # plaintextStr = "AJDSFAHDVKJSMNakljfkajhsfkawasalwhertaljhg9835498hgbq98fdaojsas1" + \
     #                "94805uyh7wjkfssfsslkdq0lkjdlsj029vnaf13iaifdjlk2jrefdjlksdflafa1" + \
     #                "94805uyhlkdq0lkjdkdq0lkjdlsj029vnaf13iaifdjlk2jrefdjlksghdflafa1" + \
     #                "h7wjkfssfsslkdq0hlkdq0lkjdkdq0lkjdlsjhlkdq0lkjdkdq0lkaslkjdlsj01"
-    plaintextStrUnit = "AJDSFAHDVKJSMNakljfkajhsfkawasalwhertaljhg9835498hgbq98fdaojsas194805uyh7wjkfssfsslkdq0lkjdlsj029vnaf13iaifdjlk2jrefdjlksdflafa194805uyhlkdq0lkjdkdq0lkjdlsj029vnaf13iaifdjlk2jrefdjlksghdflafa1h7wjkfssfsslkdq0hlkdq0lkjdkdq0lkjdlsjhlkdq0lkjdkdq0lkaslkjdlsj01"
+    plaintextStr = "AJDSFAHDVKJSMNakljfkajhsfkawasalwhertaljhg9835498hgbq98fdaojsas194805uyh7wjkfssfsslkdq0lkjdlsj029vnaf13iaifdjlk2jrefdjlksdflafa194805uyhlkdq0lkjdkdq0lkjdlsj029vnaf13iaifdjlk2jrefdjlksghdflafa1h7wjkfssfsslkdq0hlkdq0lkjdkdq0lkjdlsjhlkdq0lkjdkdq0lkaslkjdlsj01"
 
-    plaintextStr = plaintextStrUnit
-    # Concatenate string with itself to obtain larger files
-    # cycles = 800
-    # cycles = 12288
-    # for x in range(cycles):
-        # plaintextStr += plaintextStrUnit
+    print("Plaintext string: " + plaintextStr)
 
     # Convert from string of chars to integer
     plaintext = sum([ord(c) << (8 * x) for x, c in enumerate(reversed(plaintextStr))])
@@ -35,14 +30,22 @@ if(1):
     # Convert from integer to hex string
     plaintextHex = hex(plaintext)
     plaintextHexClean = plaintextHex[2:] # Prima stavo tagliando l'ultima cifra...
-    # print("\n plaintextHexClean:\n" + plaintextHexClean)
     # print("\n plaintextHex:\n" + plaintextHex)
-    plaintextHexCleanLen = len(plaintextHexClean)
 
     # Alternatively you can directly assign the hex string of the plaintext
     # plaintextHexClean = ""
 
+    # Concatenate string with itself to obtain larger files
+    plaintextHexCleanUNIT = plaintextHexClean
+    plaintextHexClean = ""
+    cycles = 800
+    # cycles = 12288
+    for x in range(cycles): # Execute this loop a number of times EQUAL to cycles
+        plaintextHexClean += plaintextHexCleanUNIT
 
+    print("\n plaintextHexClean:\n" + plaintextHexClean)
+
+    plaintextHexCleanLen = len(plaintextHexClean)
     plaintextHexCleanNumChars = len(plaintextHexClean)
     numBlocksInPlainText = plaintextHexCleanNumChars * 4 / 128
 
