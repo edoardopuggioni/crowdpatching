@@ -85,9 +85,6 @@
     truffle execute truffle-executable-script.js
     ```
 
-    This will perform several tests:
-    - To-do
-    - To-do
-    - To-do
+    This will perform several tests
 
 - Alternatively you can modify that script or create a new one
