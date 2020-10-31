@@ -323,16 +323,16 @@ public class CrowdPatchingCircuitGenerator extends CircuitGenerator
         filePlaintextHexString = Util.stringToHex(plaintextCharString);
         // Alternatively you can directly set the hex string manually
 
+        // System.out.println("Plain hex before: " + filePlaintextHexString);
 
+        //File plaintext (in hex) for imported file:
+        try{
+            Scanner scanner1 = new Scanner(new File("fileHex.txt"));
+            filePlaintextHexString = scanner1.nextLine();
+        }
+        catch(FileNotFoundException ex){}
 
-        // 200 kilobytes file:
-        // try{
-        //     Scanner scanner1 = new Scanner(new File("fileHex.txt"));
-        //     filePlaintextHexString = scanner1.nextLine();
-        // }
-        // catch(FileNotFoundException ex){}
-        // filePlaintextHexString = "414a445346414844564b4a534d4e616b6c6a666b616a6873666b61776173616c7768657274616c6a6867393833353439386867627139386664616f6a73617331393438303575796837776a6b6673736673736c6b6471306c6b6a646c736a303239766e6166313369616966646a6c6b326a726566646a6c6b7364666c6166613139343830357579686c6b6471306c6b6a646b6471306c6b6a646c736a303239766e6166313369616966646a6c6b326a726566646a6c6b73676864666c616661316837776a6b6673736673736c6b647130686c6b6471306c6b6a646b6471306c6b6a646c736a686c6b6471306c6b6a646b6471306c6b61736c6b6a646c736a3031";
-
+        // System.out.println("Plain hex after: " + filePlaintextHexString);
 
 
         rHexString = "d4c6ecb0035d57a13e59135d29c2d4c59c26393e3032af5461f181b91e6176e4";
@@ -342,18 +342,18 @@ public class CrowdPatchingCircuitGenerator extends CircuitGenerator
         // Expected digest for 256 bytes file:
         fileExpectedDigestHexString = "8457612244c5f5b7b2147b42ddbf859d68a78560d3f35ae4d411690cadd9a794";
         // Expecred digest for 200 kilobytes file:
-        // fileExpectedDigestHexString = "63f5c6c5021a29e9ac2afecf7346362b283f7fb349553ce9399288375efd89dc";
+        fileExpectedDigestHexString = "103ae1aca797bd7e4bc82c5b432f05c1cdbdbbb17c371931511f431f7cd5fc5a";
 
 
 
         // File expected ciphertext for 256 bytes file:
         fileExpectedCiphertextHexString = "a52e5f3ab41c9c15c92d242c9ab7a2286981a302ce363c7b2edacd88d16f16f4509be4bcd2dfdaf3861f23069e173a59a4bac92dfeea36815f61a3527421a2fddaf6dae55733e27987e531174725cdf033c3eedcd5a8326b9c3018edd120a81bce99aca01537118c9a743b8b3316cd455287de9ab56110ba65fe83d25055379380921813de9acd89ab378d11989d63a499069fdb719fa418efeac59f13dd898ba751f5d986f084e2fa5af0d47a2cc221bd04026c6590cfbecbe38e04a1d6574442cdeb0af749d46a9e58ca97965e903798c2ce0b6e341fdf3fd8048f3b13c4e88a78522c703b756c5d9a939cc62a376bfbc42b5df6e8c2816ce1f43281355945";
-        // File expected ciphertext for 200 kilobytes file:
-        // try{
-        //     Scanner scanner2 = new Scanner(new File("fileHexENC.txt"));
-        //     filePlaintextHexString = scanner2.nextLine();
-        // }
-        // catch(FileNotFoundException ex){}
+        // File expected ciphertext for imported file:
+        try{
+            Scanner scanner2 = new Scanner(new File("fileHexENC.txt"));
+            fileExpectedCiphertextHexString = scanner2.nextLine();
+        }
+        catch(FileNotFoundException ex){}
 
 
 

@@ -36,13 +36,13 @@ if(1):
     # plaintextHexClean = ""
 
     # Concatenate string with itself to obtain larger files
-    # plaintextHexCleanUNIT = plaintextHexClean
-    # plaintextHexClean = ""
-    # cycles = 20
-    # # cycles = 800
-    # # cycles = 12288
-    # for x in range(cycles): # Execute this loop a number of times EQUAL to cycles
-    #     plaintextHexClean += plaintextHexCleanUNIT
+    plaintextHexCleanUNIT = plaintextHexClean
+    plaintextHexClean = ""
+    cycles = 20
+    # cycles = 800
+    # cycles = 12288
+    for x in range(cycles): # Execute this loop a number of times EQUAL to cycles
+        plaintextHexClean += plaintextHexCleanUNIT
 
     print("\n plaintextHexClean:\n" + plaintextHexClean)
 
