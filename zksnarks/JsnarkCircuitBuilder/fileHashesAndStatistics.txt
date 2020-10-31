@@ -1,0 +1,10 @@
+256 B:
+8457612244c5f5b7b2147b42ddbf859d68a78560d3f35ae4d411690cadd9a794
+
+File size: 20 * 256 B = 5 KB
+File hash: 103ae1aca797bd7e4bc82c5b432f05c1cdbdbbb17c371931511f431f7cd5fc5a
+Proving key: 2.5 GB
+Verifyng key: 25.3 kB
+Time for the generator: 411.8071s
+Time for the prover: 523.1909s
+Time for the verifier: 523.2262s - 523.1909s
