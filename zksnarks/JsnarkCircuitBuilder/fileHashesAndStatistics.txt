@@ -57,6 +57,6 @@ Verifying key size: 49.9 kB
 Time for the jsnark generator: 19s
 Time for the libsnark generator: 979.0354s
 Time for the jsnark prover: 33s
-Time for the libsnark prover: 
-Generated proof size:  
-Time for the libsnark verifier: 
+Time for the libsnark prover: 1790.2058s
+Generated proof size: 304 B
+Time for the libsnark verifier: 1790.2689s - 1790.2058s = below 1s
