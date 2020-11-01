@@ -342,13 +342,13 @@ public class CrowdPatchingCircuitGenerator extends CircuitGenerator
         // Expected digest for 256 bytes file:
         // fileExpectedDigestHexString = "8457612244c5f5b7b2147b42ddbf859d68a78560d3f35ae4d411690cadd9a794";
         // Expected digest for 0.5 kilobytes file:
-        // fileExpectedDigestHexString = "5674619e4cc2517a287ca18723d14c6434188e0d1b4c9c2a3643d6e963faeaec";
+        fileExpectedDigestHexString = "5674619e4cc2517a287ca18723d14c6434188e0d1b4c9c2a3643d6e963faeaec";
         // Expected digest for 2 kilobytes file:
         // fileExpectedDigestHexString = "cad79ebcc5d2b369c40245e97b329238a92780cf6681e6347c9840c79640e2e1";
         // Expected digest for 5 kilobytes file:
         // fileExpectedDigestHexString = "103ae1aca797bd7e4bc82c5b432f05c1cdbdbbb17c371931511f431f7cd5fc5a";
         // Expected digest for 10 kilobytes file:
-        fileExpectedDigestHexString = "3fd74c14b21d0b20880e398946b45668ee7aaa8f7caa9510dce5314f9beaebf1";
+        // fileExpectedDigestHexString = "3fd74c14b21d0b20880e398946b45668ee7aaa8f7caa9510dce5314f9beaebf1";
         
 
 

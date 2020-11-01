@@ -22,7 +22,7 @@ Time for the jsnark generator: around 1s
 Time for the libsnark generator: 46.0741s
 Time for the jsnark prover: around 1s
 Time for the libsnark prover: 50.8911s
-Generated proof size: 
+Generated proof size: 304 B
 Time for the libsnark verifier: 50.8969s - 50.8911s = below 1s
 
 
