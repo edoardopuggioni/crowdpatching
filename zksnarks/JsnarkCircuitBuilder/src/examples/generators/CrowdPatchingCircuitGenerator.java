@@ -325,7 +325,7 @@ public class CrowdPatchingCircuitGenerator extends CircuitGenerator
 
         // System.out.println("Plain hex before: " + filePlaintextHexString);
 
-        //File plaintext (in hex) for imported file:
+        //File plaintext (in hex) from txt file:
         try{
             Scanner scanner1 = new Scanner(new File("fileHex.txt"));
             filePlaintextHexString = scanner1.nextLine();
@@ -340,15 +340,17 @@ public class CrowdPatchingCircuitGenerator extends CircuitGenerator
 
 
         // Expected digest for 256 bytes file:
-        fileExpectedDigestHexString = "8457612244c5f5b7b2147b42ddbf859d68a78560d3f35ae4d411690cadd9a794";
-        // Expecred digest for 200 kilobytes file:
-        fileExpectedDigestHexString = "103ae1aca797bd7e4bc82c5b432f05c1cdbdbbb17c371931511f431f7cd5fc5a";
+        // fileExpectedDigestHexString = "8457612244c5f5b7b2147b42ddbf859d68a78560d3f35ae4d411690cadd9a794";
+        // Expecred digest for 0.5 kilobytes file:
+        fileExpectedDigestHexString = "5674619e4cc2517a287ca18723d14c6434188e0d1b4c9c2a3643d6e963faeaec";
+        // Expecred digest for 5 kilobytes file:
+        // fileExpectedDigestHexString = "103ae1aca797bd7e4bc82c5b432f05c1cdbdbbb17c371931511f431f7cd5fc5a";
 
 
 
         // File expected ciphertext for 256 bytes file:
         fileExpectedCiphertextHexString = "a52e5f3ab41c9c15c92d242c9ab7a2286981a302ce363c7b2edacd88d16f16f4509be4bcd2dfdaf3861f23069e173a59a4bac92dfeea36815f61a3527421a2fddaf6dae55733e27987e531174725cdf033c3eedcd5a8326b9c3018edd120a81bce99aca01537118c9a743b8b3316cd455287de9ab56110ba65fe83d25055379380921813de9acd89ab378d11989d63a499069fdb719fa418efeac59f13dd898ba751f5d986f084e2fa5af0d47a2cc221bd04026c6590cfbecbe38e04a1d6574442cdeb0af749d46a9e58ca97965e903798c2ce0b6e341fdf3fd8048f3b13c4e88a78522c703b756c5d9a939cc62a376bfbc42b5df6e8c2816ce1f43281355945";
-        // File expected ciphertext for imported file:
+        // File expected ciphertext from txt file:
         try{
             Scanner scanner2 = new Scanner(new File("fileHexENC.txt"));
             fileExpectedCiphertextHexString = scanner2.nextLine();
