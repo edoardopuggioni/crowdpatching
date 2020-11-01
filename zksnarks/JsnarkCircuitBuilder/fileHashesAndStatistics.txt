@@ -1,7 +1,8 @@
 File size: 
 File hash: 
-Proving key: 
-Verifyng key: 
+Proving key size: 
+Verifyng key size: 
+Generated proof size:  
 Time for the jsnark generator: 
 Time for the libsnark generator: 
 Time for the jsnark prover: 
@@ -15,32 +16,47 @@ File hash: 8457612244c5f5b7b2147b42ddbf859d68a78560d3f35ae4d411690cadd9a794
 
 File size: 2 * 256 B = 0.5 KB
 File hash: 5674619e4cc2517a287ca18723d14c6434188e0d1b4c9c2a3643d6e963faeaec
-Proving key: 270.2 MB
-Verifyng key: 3.4 kB
-Time for the jsnark generator: just below 1s
+Proving key size: 270.2 MB
+Verifyng key size: 3.4 kB
+Generated proof size: 
+Time for the jsnark generator: around 1s
 Time for the libsnark generator: 46.0741s
-Time for the jsnark prover: just below 1s
+Time for the jsnark prover: around 1s
 Time for the libsnark prover: 50.8911s
-Time for the libsnark verifier: 50.8969s - 50.8911s = way below 1s
+Time for the libsnark verifier: 50.8969s - 50.8911s = below 1s
 
 
 File size: 8 * 256 B = 2 KB
+File hash: cad79ebcc5d2b369c40245e97b329238a92780cf6681e6347c9840c79640e2e1
+Proving key size: 1 GB
+Verifyng key size: 10.7 kB
+Generated proof size: 304 bytes
+Time for the jsnark generator: 4s
+Time for the libsnark generator: 167.1300s
+Time for the jsnark prover: 5s
+Time for the libsnark prover: 213.4250s
+Time for the libsnark verifier: 213.4376s - 213.4250s = below 1s
+
+
+File size: 20 * 256 B = 5 KB
+File hash: 103ae1aca797bd7e4bc82c5b432f05c1cdbdbbb17c371931511f431f7cd5fc5a
+Proving key size: 2.5 GB
+Verifyng key size: 25.3 kB
+Generated proof size: 
+Time for the jsnark generator: 11s
+Time for the libsnark generator: 411.8071s
+Time for the jsnark prover: 12s
+Time for the libsnark prover: 523.1909s
+Time for the libsnark verifier: 523.2262s - 523.1909s = 0.04s
+
+
+File size: 
 File hash: 
-Proving key: 
-Verifyng key: 
+Proving key size: 
+Verifyng key size: 
+Generated proof size:  
 Time for the jsnark generator: 
 Time for the libsnark generator: 
 Time for the jsnark prover: 
 Time for the libsnark prover: 
 Time for the libsnark verifier: 
-
-
-File size: 20 * 256 B = 5 KB
-File hash: 103ae1aca797bd7e4bc82c5b432f05c1cdbdbbb17c371931511f431f7cd5fc5a
-Proving key: 2.5 GB
-Verifyng key: 25.3 kB
-Time for the jsnark generator: 7s
-Time for the libsnark generator: 411.8071s
-Time for the jsnark prover: 12s
-Time for the libsnark prover: 523.1909s
-Time for the libsnark verifier: 523.2262s - 523.1909s = 0.04s
