@@ -30,7 +30,7 @@ File size: 8 * 256 B = 2 KB
 File hash: cad79ebcc5d2b369c40245e97b329238a92780cf6681e6347c9840c79640e2e1
 Proving key size: 1 GB
 Verifyng key size: 10.7 kB
-Generated proof size: 304 bytes
+Generated proof size: 304 B
 Time for the jsnark generator: 4s
 Time for the libsnark generator: 167.1300s
 Time for the jsnark prover: 5s
@@ -42,15 +42,15 @@ File size: 20 * 256 B = 5 KB
 File hash: 103ae1aca797bd7e4bc82c5b432f05c1cdbdbbb17c371931511f431f7cd5fc5a
 Proving key size: 2.5 GB
 Verifyng key size: 25.3 kB
-Generated proof size: 
+Generated proof size: 304 B
 Time for the jsnark generator: 11s
-Time for the libsnark generator: 411.8071s
+Time for the libsnark generator: 440.7163s
 Time for the jsnark prover: 12s
 Time for the libsnark prover: 523.1909s
-Time for the libsnark verifier: 523.2262s - 523.1909s = 0.04s
+Time for the libsnark verifier: 523.2262s - 523.1909s = below 1s
 
 
-File size: 
+File size: 40 * 256 B = 10 KB
 File hash: 
 Proving key size: 
 Verifyng key size: 

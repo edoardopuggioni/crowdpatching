@@ -39,8 +39,9 @@ if(1):
     plaintextHexCleanUNIT = plaintextHexClean
     plaintextHexClean = ""
     # cycles = 2
-    cycles = 8
+    # cycles = 8
     # cycles = 20
+    cycles = 40
     # cycles = 800
     # cycles = 12288
     for x in range(cycles): # Execute this loop a number of times EQUAL to cycles
